@@ -1,17 +1,11 @@
 const pages = ["/", "index.html", "drawing.html"];
-
-// Attach an event listener to the window's load event
-window.onload = function() {
-    // Call your function when the window has finished loading
-    
-    for (page of pages){
-        if (window.location.pathname.endsWith(page) ){
-            navCreate();
-            break;
-        }
-    }   
-};
-
+  
+for (page of pages){
+    if (window.location.pathname.endsWith(page) ){
+        navCreate();
+        break;
+    }
+}   
 function navCreate(){
     fetch('reusables/nav.html')
     .then(res => res.text())
@@ -81,17 +75,31 @@ function navCreate(){
       }
     })
   
+
+    const observer = new MutationObserver((mutationsList, observer) => {
+        for (const mutation of mutationsList) {
+            if (mutation.type === 'childList') {
+                // Check if the elements you're interested in have been added
+                const elements = document.querySelectorAll('[data-bs-theme-value]');
+                if (elements.length > 0) {
+                    // Elements are present, execute your script
+                    document.querySelectorAll('[data-bs-theme-value]').forEach(toggle => {
+                        toggle.addEventListener('click', () => {
+                            const theme = toggle.getAttribute('data-bs-theme-value')
+                            setStoredTheme(theme)
+                            setTheme(theme)
+                            showActiveTheme(theme, true)
+                        })
+                    })
+                    observer.disconnect(); // Stop observing changes once the elements are found
+                    break;
+                }
+            }
+        }
+    });
+    
+    observer.observe(document.body, { childList: true, subtree: true });
     window.addEventListener('DOMContentLoaded', () => {
       showActiveTheme(getPreferredTheme())
-  
-      document.querySelectorAll('[data-bs-theme-value]')
-        .forEach(toggle => {
-          toggle.addEventListener('click', () => {
-            const theme = toggle.getAttribute('data-bs-theme-value')
-            setStoredTheme(theme)
-            setTheme(theme)
-            showActiveTheme(theme, true)
-          })
-        })
     })
   })()
