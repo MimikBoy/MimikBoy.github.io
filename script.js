@@ -1,4 +1,4 @@
-const pages = ["index.html", "drawing.html"];
+const pages = ["/", "index.html", "drawing.html"];
 
 // Attach an event listener to the window's load event
 window.onload = function() {
