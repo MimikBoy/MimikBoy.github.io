@@ -28,6 +28,9 @@ const navbar = `<svg xmlns="http://www.w3.org/2000/svg" class="d-none">
       <li class="nav-item">
         <a class="nav-link" id="drawingPage" aria-current="page" href="drawing.html">Drawing</a> 
       </li>
+      <li class="nav-item">
+        <a class="nav-link" id="snakePage" aria-current="page" href="snake.html">Snake</a> 
+      </li>
     </ul>
     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
       <li class="nav-item dropdown">
@@ -62,7 +65,7 @@ const navbar = `<svg xmlns="http://www.w3.org/2000/svg" class="d-none">
   </div>
 </div>
 </nav>`
-const pages = ["index", "drawing", "/"];
+const pages = ["index", "drawing", "snake", "/"];
 var prevPage = "";
 for (page of pages){
     if (window.location.pathname.includes(page)){
@@ -112,8 +115,6 @@ function theme(){
         const activeThemeIcon = document.querySelector('.theme-icon-active use')
         const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`)
         const svgOfActiveBtn = btnToActive.querySelector('svg use').getAttribute('href')
-        
-        console.log(activeThemeIcon);
 
         document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
           element.classList.remove('active')
@@ -163,7 +164,6 @@ function activePage(){
   var element;
   for (page of pages){
     if (window.location.pathname.includes(page)){
-      console.log(page+"Page");
       if (page === "/"){
         page = "index";
       }

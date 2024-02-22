@@ -1,7 +1,7 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
     <head>
-        <title>Learning</title>
+        <title>Title</title>
         <!-- Required meta tags -->
         <meta charset="utf-8" />
         <meta
@@ -9,7 +9,7 @@
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
 
-        <!-- Bootstrap CSS v5.3.2 -->
+        <!-- Bootstrap CSS v5.2.1 -->
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
             rel="stylesheet"
@@ -23,17 +23,21 @@
             <div id="replace_with_navbar"><div>
         </header>
         <main>
+
             <div class="container-fluid">
-                <h1>This is where im going to make a drawing app!</h1>
+                <h1>
+                    Snake
+                    <small class="text-body-secondary">I was going to make the drawing app first but i decided instead to make something I 
+                        already knew to just learn the syntax.
+                    </small>
+                </h1>
             </div>
-            <div class="container-fluid">
-                <p>uhh stuff go here?</p>
-            </div>
+            <canvas id="gameCanvas" width="400" height="400"></canvas>
+
         </main>
         <footer>
             <!-- place footer here -->
         </footer>
-        <!-- Bootstrap JavaScript Libraries -->
         <script
             src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
             integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
@@ -47,5 +51,6 @@
         ></script>
 
         <script src="scripts/script.js"></script>
+        <script src="scripts/snake.js"></script>
     </body>
 </html>
