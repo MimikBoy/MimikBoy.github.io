@@ -137,7 +137,6 @@ function handleTouchMove(evt) {
 
     var xDiff = xDown - xUp;
     var yDiff = yDown - yUp;
-    console.log(xDiff + ", " + yDiff);
                                                                          
     if ( Math.abs(xDiff) > Math.abs( yDiff ) ) {/*most significant*/
         if ( xDiff > 0 ) {
@@ -159,7 +158,6 @@ function handleTouchMove(evt) {
 
 
 isMobile();
-
 if(mobile){
     // Handle touch input
     document.addEventListener('touchstart', handleTouchStart, false);
