@@ -167,17 +167,26 @@ function handleTouchMove(evt) {
             if (direction !== "up") direction = "down";
         }                                                                 
     }
+    
     /* reset values */
     xDown = null;
     yDown = null;                                             
 }
 
+function preventArrowKeyScrolling(event) {
+    // Check if the pressed key is an arrow key (ArrowUp, ArrowDown, ArrowLeft, ArrowRight)
+    if (event.key.startsWith('Arrow')) {
+        // Prevent the default scrolling behavior for arrow keys
+        event.preventDefault();
+    }
+}
 
 isMobile();
+
 if(mobile){
     // Handle touch input
     document.addEventListener('touchstart', handleTouchStart, false);
-    document.addEventListener('touchmove', handleTouchMove, false);
+    document.addEventListener('touchmove', handleTouchMove);
 } else {
     // Handle keyboard input
 document.addEventListener("keydown", event => {
@@ -197,6 +206,8 @@ document.addEventListener("keydown", event => {
     }
 });
 }
+
+document.addEventListener('keydown', preventArrowKeyScrolling);
 // Start the game loop
 
 gameLoop();
