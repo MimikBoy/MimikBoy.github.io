@@ -33,35 +33,6 @@ function getTouches(evt){
 //     xDown = firstTouch.clientX;
 //     yDown = firstTouch.clientY;
 // }
-
-function handleTouchMove(evt) {
-    if ( ! xDown || ! yDown ) {
-        return;
-    }
-
-    var xUp = evt.touches[0].clientX;                                    
-    var yUp = evt.touches[0].clientY;
-
-    var xDiff = xDown - xUp;
-    var yDiff = yDown - yUp;
-                                                                         
-    if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
-        if ( xDiff > 0 ) {
-            if (direction !== "left") direction = "right"; 
-        } else {
-            if (direction !== "right") direction = "left";
-        }                       
-    } else {
-        if ( yDiff > 0 ) {
-            if (direction !== "up") direction = "down";
-        } else { 
-            if (direction !== "down") direction = "up";
-        }                                                                 
-    }
-    /* reset values */
-    xDown = null;
-    yDown = null;                                             
-}
   
 // Main game loop
 function gameLoop() {
@@ -150,11 +121,48 @@ function render() {
     });
 }
 
+function handleTouchStart(evt) {
+    const firstTouch = getTouches(evt)[0];                                      
+    xDown = firstTouch.clientX;                                      
+    yDown = firstTouch.clientY;                                      
+};   
+
+function handleTouchMove(evt) {
+    if ( !xDown || !yDown ) {
+         return;
+    }
+
+    var xUp = evt.touches[0].clientX;                                    
+    var yUp = evt.touches[0].clientY;
+
+    var xDiff = xDown - xUp;
+    var yDiff = yDown - yUp;
+    console.log(xDiff + ", " + yDiff);
+                                                                         
+    if ( Math.abs(xDiff) > Math.abs( yDiff ) ) {/*most significant*/
+        if ( xDiff > 0 ) {
+            if (direction !== "right") direction = "left";
+        } else {
+            if (direction !== "left") direction = "right"; 
+        }                       
+    } else {
+        if ( yDiff > 0 ) {
+            if (direction !== "down") direction = "up";
+        } else { 
+            if (direction !== "up") direction = "down";
+        }                                                                 
+    }
+    /* reset values */
+    xDown = null;
+    yDown = null;                                             
+}
+
 
 isMobile();
 
 if(mobile){
     // Handle touch input
+    document.addEventListener('touchstart', handleTouchStart, false);
     document.addEventListener('touchmove', handleTouchMove, false);
 } else {
     // Handle keyboard input
