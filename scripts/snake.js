@@ -2,6 +2,8 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 var divBottom = canvas.getBoundingClientRect().top;
+ctx.canvas.width = window.innerWidth;
+ctx.canvas.height = (window.innerHeight - divBottom);
 
 // Set initial game state
 let snake = [{ x: 10, y: 10 }];
@@ -13,14 +15,32 @@ let mobile = false;
 let xDown = null;
 let yDown = null;
 
+function on() {
+    document.getElementById("overlay").style.display = "block";
+  }
+  
+  function off() {
+    document.getElementById("overlay").style.display = "none";
+  }
+
+function restart(){
+    snake = [{ x: 10, y: 10 }];
+    food = { x: 15, y: 15 };
+    direction = "right";
+    gameSpeed = 100;
+    gameOver = false;
+    mobile = false;
+    xDown = null;
+    yDown = null;
+    gameLoop();
+}
+
 //check for mobile user
 function isMobile() {
     const regex = /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
 
     if (regex.test(navigator.userAgent)) {
         mobile = true;
-        ctx.canvas.width = 400;
-        ctx.canvas.height = 400;
     } 
 
     return;
@@ -29,12 +49,6 @@ function isMobile() {
 function getTouches(evt){
     return evt.touches || evt.originalEvent.touches;
 }
-
-// function handleTouchStart(evt){
-//     const firstTouch = getTouches(evt)[0];
-//     xDown = firstTouch.clientX;
-//     yDown = firstTouch.clientY;
-// }
   
 // Main game loop
 function gameLoop() {
@@ -92,7 +106,7 @@ function checkCollision() {
     // Check if snake hits the walls
     if (head.x < 0 || head.x >= canvas.width / 10 || head.y < 0 || head.y >= canvas.height / 10) {
         gameOver = true;
-        alert("Game Over!");
+        on();
         return;
     }
 
@@ -100,7 +114,7 @@ function checkCollision() {
     for (let i = 1; i < snake.length; i++) {
         if (head.x === snake[i].x && head.y === snake[i].y) {
             gameOver = true;
-            alert("Game Over!");
+            on();
             return;
         }
     }
@@ -186,3 +200,4 @@ document.addEventListener("keydown", event => {
 // Start the game loop
 
 gameLoop();
+

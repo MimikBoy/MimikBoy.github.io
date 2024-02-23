@@ -17,6 +17,8 @@
             crossorigin="anonymous"
         />
 
+        <link rel="stylesheet" href="styles.css">
+
         <style>
             body {
                 overflow: hidden;
@@ -39,9 +41,25 @@
                     </small>
                 </h1>
             </div>
-            
+            <div id="overlay" onclick="off()">
+                <div id="text" class="alert alert-danger" role="alert">
+                    <div class="d-flex align-items-center">
+                        <svg class="bi flex-shrink-0 me-2" width="20" height="20" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                        <h4 class="alert-heading align-items-center">Game Over</h4>
+                    </div>
+                    <p class="text-center">You lost :(</p>
+                    <hr>
+                    <div class="mx-auto p-2">
+                        <button type="button" class="btn btn-success mx-auto" onclick="restart()">Retry</button>
+                        <button type="button" class="btn btn-secondary mx-auto" onclick="off()">Quit</button>
+                    </div>
+                    
+                </div>
+            </div>
             <div class="container-fluid", id="gameContainer">
+                
                 <canvas id="gameCanvas" class="container-fluid" width = "1600" height = "800"></canvas>
+                
             </div>
         </main>
         <footer>
