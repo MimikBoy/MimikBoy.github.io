@@ -19,6 +19,8 @@ function isMobile() {
 
     if (regex.test(navigator.userAgent)) {
         mobile = true;
+        ctx.canvas.width = 400;
+        ctx.canvas.height = 400;
     } 
 
     return;
@@ -90,7 +92,7 @@ function checkCollision() {
     // Check if snake hits the walls
     if (head.x < 0 || head.x >= canvas.width / 10 || head.y < 0 || head.y >= canvas.height / 10) {
         gameOver = true;
-        alert("Game Over! With Touch");
+        alert("Game Over!");
         return;
     }
 
